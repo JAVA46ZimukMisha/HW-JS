@@ -17,8 +17,6 @@ function getSymbol(digit,codingString) {
 }
 function validateCodingString (codingString) {
     let check = true;
-    let symb;
-    let symb1;
     for (let i = 0; i < codingString.length; i++) {
         for (let j = 0; j< codingString.length; j++) {
             if (codingString[i] == codingString[j] && i != j) {
