@@ -1,29 +1,31 @@
-//task 1
-console.log("a" + `${"a"-"s"}` + "aS");
-
-
-// task 2
-console.log(calculator(5,0,8));
-function calculator(a, b, c) {
-    switch(c) {
-    case 1: return a + b;
-    case 2: return a - b;
-    case 3: return a * b;
-    case 4: if (b == 0) {
-        return "error: it's impossible to divide in 0";
-        }
-        else {
-            return a / b;
-        }
-    default: return "error; please, enter operator from 1 to 4";
-    }
+function encode(num, codingString) {
+    let validate = validateCodingString(codingString);
+    if (validate == true) {
+        let res = "";
+        do {
+            const digit = Math.trunc(num % codingString.length);
+            const symbol = getSymbol(digit, codingString);
+            res = symbol + res;
+            num = Math.trunc(num/codingString.length);
+        }while(num >= 1);
+        return res;
+    }   
+    else return "error! Coding string has repeated symbols"
 }
-
-
-// task 3
-console.log(sumSelery(5)(10, 3));
-function sumSelery (howManyMonths) {
-    return  function monthSelery (wage, hours) {
-        return howManyMonths * (wage * hours);
-    }
+function getSymbol(digit,codingString) {
+    return "" + codingString[digit];
 }
+function validateCodingString (codingString) {
+    let check = true;
+    let symb;
+    let symb1;
+    for (let i = 0; i < codingString.length; i++) {
+        for (let j = 0; j< codingString.length; j++) {
+            if (codingString[i] == codingString[j] && i != j) {
+                check = false;
+            }
+        }
+    }
+    return check;
+}
+console.log(encode(1786, "*&$#@!"));
