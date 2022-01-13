@@ -1,16 +1,18 @@
 function encode(num, codingString) {
-    let validate = validateCodingString(codingString);
-    if (validate == true) {
-        let res = "";
-        do {
-            const digit = Math.trunc(num % codingString.length);
-            const symbol = getSymbol(digit, codingString);
-            res = symbol + res;
-            num = Math.trunc(num/codingString.length);
-        }while(num >= 1);
-        return res;
+    if (validateCodingString(codingString)) {
+        return encodeIfCodingStringCorrect(num, codingString);
     }   
     else return "error! Coding string has repeated symbols"
+}
+function encodeIfCodingStringCorrect (num, codingString) {
+    let res = "";
+    do {
+        const digit = Math.trunc(num % codingString.length);
+        const symbol = getSymbol(digit, codingString);
+        res = symbol + res;
+        num = Math.trunc(num/codingString.length);
+    }while(num >= 1);
+    return res;
 }
 function getSymbol(digit,codingString) {
     return "" + codingString[digit];
@@ -26,4 +28,4 @@ function validateCodingString (codingString) {
     }
     return check;
 }
-console.log(encode(1786, "*&$#@!"));
+console.log(encode(165, "*&$#@!"));
