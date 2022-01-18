@@ -1,31 +1,47 @@
-function encode(num, codingString) {
-    if (validateCodingString(codingString)) {
-        return encodeIfCodingStringCorrect(num, codingString);
-    }   
-    else return "error! Coding string has repeated symbols"
-}
-function encodeIfCodingStringCorrect (num, codingString) {
-    let res = "";
-    do {
-        const digit = Math.trunc(num % codingString.length);
-        const symbol = getSymbol(digit, codingString);
-        res = symbol + res;
-        num = Math.trunc(num/codingString.length);
-    }while(num >= 1);
-    return res;
-}
-function getSymbol(digit,codingString) {
-    return "" + codingString[digit];
-}
-function validateCodingString (codingString) {
-    let check = true;
-    for (let i = 0; i < codingString.length; i++) {
-        for (let j = 0; j< codingString.length; j++) {
-            if (codingString[i] == codingString[j] && i != j) {
-                check = false;
-            }
+//task 1
+const arHw = [13, 28,4,15, 25, -10, 40, 17, 27];
+arHw.sort((a,b) => {
+    if (a%2 && b%2) {
+        return b-a;
+    }
+    if (!(a%2) && b%2) {
+        return -1;
+    }
+    if (a%2 && !(b%2)) {
+        return 1;
+    }
+    if  (!(a%2) && !(b%2)) {
+        return a-b;
+    }
+    else return 0;
+});
+console.log(arHw);
+console.log(" ");
+
+
+//task2
+const sourceMatrix = [[1,2],[3,4], [5,6]]; 
+const resultMatrix = matrixTransp(sourceMatrix);
+displayMatrix(resultMatrix);
+function matrixTransp(matrix) {
+const result = [];
+    for (let i=0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            if (!result[j]) {
+                result[j] = [];
+            };
+            result[j][i] = matrix[i][j];
         }
     }
-    return check;
+    return result;
 }
-console.log(encode(165, "*&$#@!"));
+function displayMatrix(matrix) {
+    for (let i=0; i<matrix.length; i++) {
+        let row = '';
+        for (let j=0; j<matrix[i].length; j++){
+            row = row + matrix[i][j] + ' ';
+        }
+        console.log(row);
+    }
+}
+
