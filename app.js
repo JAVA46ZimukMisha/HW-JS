@@ -1,47 +1,22 @@
-//task 1
-const arHw = [13, 28,4,15, 25, -10, 40, 17, 27];
-arHw.sort((a,b) => {
-    if (a%2 && b%2) {
-        return b-a;
+const ar = [-10, 50, -13, 80, 40, 70];
+let str = '';
+//Task1
+function myForEach(array, callbackFunction) {
+    for (let i = 0; i < ar.length; i++) {
+        callbackFunction(array[i]); 
     }
-    if (!(a%2) && b%2) {
-        return -1;
-    }
-    if (a%2 && !(b%2)) {
-        return 1;
-    }
-    if  (!(a%2) && !(b%2)) {
-        return a-b;
-    }
-    else return 0;
-});
-console.log(arHw);
-console.log(" ");
-
-
+}
+myForEach(ar, n => str += '#' + n);
+console.log(ar);
 //task2
-const sourceMatrix = [[1,2],[3,4], [5,6]]; 
-const resultMatrix = matrixTransp(sourceMatrix);
-displayMatrix(resultMatrix);
-function matrixTransp(matrix) {
-const result = [];
-    for (let i=0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[i].length; j++) {
-            if (!result[j]) {
-                result[j] = [];
-            };
-            result[j][i] = matrix[i][j];
-        }
+const ar1 = [-10, 50, -13, 80, 40, 70];
+function myMap( array, callBackFunc) {
+    const arr1 = [];
+    for (let i = 0; i<array.length; i++) {
+        arr1[i] = callBackFunc(array[i]);
     }
-    return result;
+    return arr1;
 }
-function displayMatrix(matrix) {
-    for (let i=0; i<matrix.length; i++) {
-        let row = '';
-        for (let j=0; j<matrix[i].length; j++){
-            row = row + matrix[i][j] + ' ';
-        }
-        console.log(row);
-    }
-}
+const ar2 = myMap(ar1, n => n = n*2)
+console.log(ar2);
 
