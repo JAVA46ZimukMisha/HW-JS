@@ -12,9 +12,9 @@ console.log(ar);
 const ar1 = [-10, 50, -13, 80, 40, 70];
 function myMap( array, callBackFunc) {
     const arr1 = [];
-    for (let i = 0; i<array.length; i++) {
-        arr1[i] = callBackFunc(array[i]);
-    }
+    myForEach(array, function(n) {
+        return arr1.push(callBackFunc(n))
+    });
     return arr1;
 }
 const ar2 = myMap(ar1, n => n = n*2)
