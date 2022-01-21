@@ -7,7 +7,7 @@ function myForEach(array, callbackFunction) {
     }
 }
 myForEach(ar, n => str += '#' + n);
-console.log(ar);
+console.log(str);
 //task2
 const ar1 = [-10, 50, -13, 80, 40, 70];
 function myMap( array, callBackFunc) {
