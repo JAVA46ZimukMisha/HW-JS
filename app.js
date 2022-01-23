@@ -2,7 +2,7 @@ const ar = [-10, 50, -13, 80, 40, 70];
 let str = '';
 //Task1
 function myForEach(array, callbackFunction) {
-    for (let i = 0; i < ar.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         callbackFunction(array[i], i, array); 
     }
 }
