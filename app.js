@@ -34,17 +34,20 @@ console.log(res);
 //task3
 
 function getPerson(persons, city) {
-    let indexCity =Object.keys(persons[0].address).indexOf("city");
-    const personInTheCity = persons.filter((n, i, a)=> Object.values(persons[i].address)[indexCity] == city);
+    const personInTheCity = persons.filter((n, i, a)=> persons[i].address.city == city);
     return personInTheCity;
 }
 
 //task4
 function movePersonsNoCityAtBeginning(persons, city) {
-    let indexCity =Object.keys(persons[0].address).indexOf("city");
-    const arrayNoCity = persons.filter((n, i, a)=> Object.values(persons[i].address)[indexCity] != city);
-    const arrayCity = persons.filter((n, i, a)=> Object.values(persons[i].address)[indexCity] == city);
+    const arrayNoCity = persons.filter((n, i, a)=> persons[i].address.city != city);
+    const arrayCity = persons.filter((n, i, a)=> persons[i].address.city == city);
     const res = arrayNoCity.concat(arrayCity);
+    return res;
+}
+function movePersonsNoCityAtBeginning1 (persons, city) {
+    const res = persons.slice();
+    res.sort((a, b) => ((a.address.city == city) && (b.address.city != city)) ? 1 : 0);
     return res;
 }
 function createAddress (city, street) {
@@ -63,3 +66,5 @@ const rehovot = getPerson(persons, "Rehovot");
 console.log(rehovot);
 const newArray = movePersonsNoCityAtBeginning(persons, "Rehovot");
 console.log(newArray);
+const newArray1 = movePersonsNoCityAtBeginning1(persons, "Rehovot");
+console.log(newArray1);
