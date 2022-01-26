@@ -50,6 +50,16 @@ function movePersonsNoCityAtBeginning1 (persons, city) {
     res.sort((a, b) => (a.address.city == city) ? ((b.address.city != city) ? 1 : 0) : ((b.address.city != city) ? 0 : -1));
     return res;
 }
+function movePersonsNoCityAtBeginning2 (persons, city) {
+    const res = persons.slice();
+    myForEach(res, (n, i, a) => {
+        if (n.address.city != city) {
+            res.unshift(n);
+            res.splice(i+1, 1);
+        }
+    })
+    return res;
+}
 function createAddress (city, street) {
     return {city, street}
 }
@@ -60,7 +70,7 @@ const persons = [
     createPerson(123, "Vasya", createAddress("Rehovot", "Parshani")),
     createPerson(124, "Olya", createAddress("Rehovot", "Pr.Plaut")),
     createPerson(125, "Tolya", createAddress("Tel-Aviv", "Dizengoff")),
-    createPerson(125, "Sara", createAddress("Lod", "Sokolov"))
+    createPerson(126, "Sara", createAddress("Lod", "Sokolov"))
 ] 
 const rehovot = getPerson(persons, "Rehovot");
 console.log(rehovot);
@@ -68,3 +78,5 @@ const newArray = movePersonsNoCityAtBeginning(persons, "Rehovot");
 console.log(newArray);
 const newArray1 = movePersonsNoCityAtBeginning1(persons, "Rehovot");
 console.log(newArray1);
+const newArray2 = movePersonsNoCityAtBeginning2(persons, "Rehovot");
+console.log(newArray2);
