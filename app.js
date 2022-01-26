@@ -47,7 +47,7 @@ function movePersonsNoCityAtBeginning(persons, city) {
 }
 function movePersonsNoCityAtBeginning1 (persons, city) {
     const res = persons.slice();
-    res.sort((a, b) => ((a.address.city == city) && (b.address.city != city)) ? 1 : 0);
+    res.sort((a, b) => (a.address.city == city) ? ((b.address.city != city) ? 1 : 0) : ((b.address.city != city) ? 0 : -1));
     return res;
 }
 function createAddress (city, street) {
