@@ -60,6 +60,7 @@ function movePersonsNoCityAtBeginning2 (persons, city) {
     })
     return res;
 }
+
 function createAddress (city, street) {
     return {city, street}
 }
@@ -80,3 +81,13 @@ const newArray1 = movePersonsNoCityAtBeginning1(persons, "Rehovot");
 console.log(newArray1);
 const newArray2 = movePersonsNoCityAtBeginning2(persons, "Rehovot");
 console.log(newArray2);
+// task5 extra
+const maxIdRehovot = persons.filter((n, i, a)=> (a[i].address.city == "Rehovot") && (n.id > a[0].id))[0].name;
+console.log(maxIdRehovot);
+//task6 extra
+const cityTimes = {
+    "Rehovot" : persons.filter((n, i, a) => a[i].address.city == "Rehovot").length, 
+    "Lod" : persons.filter((n, i, a) => a[i].address.city == "Lod").length, 
+    "Tel-Aviv" : persons.filter((n, i, a) => a[i].address.city == "Tel-Aviv").length
+}
+console.log(cityTimes);
