@@ -85,9 +85,7 @@ console.log(newArray2);
 const maxIdRehovot = persons.filter ((n, i, a) => n.id == persons.filter((n, i, a)=> n.address.city == "Rehovot").reduce((max, cur) => cur.id > max ? cur.id : max, persons[0].id))[0].name;
 console.log(maxIdRehovot);
 //task6 extra
-const cityTimes = {
-    "Rehovot" : persons.filter((n, i, a) => a[i].address.city == "Rehovot").length, 
-    "Lod" : persons.filter((n, i, a) => a[i].address.city == "Lod").length, 
-    "Tel-Aviv" : persons.filter((n, i, a) => a[i].address.city == "Tel-Aviv").length
-}
-console.log(cityTimes);
+const times = {};
+persons.forEach((n, i, a) => times[`${n.address.city}`] = persons.filter((p, i, a) => a[i].address.city == n.address.city).length);
+console.log(times);
+
