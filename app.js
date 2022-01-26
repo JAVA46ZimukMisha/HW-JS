@@ -81,8 +81,8 @@ const newArray1 = movePersonsNoCityAtBeginning1(persons, "Rehovot");
 console.log(newArray1);
 const newArray2 = movePersonsNoCityAtBeginning2(persons, "Rehovot");
 console.log(newArray2);
-// task5 extra
-const maxIdRehovot = persons.filter((n, i, a)=> (a[i].address.city == "Rehovot") && (n.id > a[0].id))[0].name;
+// task5 extra 
+const maxIdRehovot = persons.filter ((n, i, a) => n.id == persons.filter((n, i, a)=> n.address.city == "Rehovot").reduce((max, cur) => cur.id > max ? cur.id : max, persons[0].id))[0].name;
 console.log(maxIdRehovot);
 //task6 extra
 const cityTimes = {
