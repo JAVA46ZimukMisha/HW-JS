@@ -86,6 +86,6 @@ const maxIdRehovot = persons.filter ((n, i, a) => n.id == persons.filter((n, i, 
 console.log(maxIdRehovot);
 //task6 extra
 const times = {};
-persons.forEach((n, i, a) => times[`${n.address.city}`] = persons.filter((p, i, a) => a[i].address.city == n.address.city).length);
+persons.forEach((n, i, a) => times[`${n.address.city}`] = persons.filter((p, i, a) => p.address.city == n.address.city).length);
 console.log(times);
 
