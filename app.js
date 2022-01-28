@@ -7,15 +7,12 @@ function displayOccurrences(array) {
 }
 //Task1
 function createObjOccurrences(array) {
-    const result = {};
-    array.reduce((_, cur) => result[cur] =  result[cur] === undefined ? 1 : result[cur] + 1, 1);
-    return result;
+    return array.reduce((result, cur) => {result[cur] = result[cur] === undefined ? 1 : result[cur] + 1; return result}, {});
 }
 // Task2
 function countBy (array, cbf) {
-    const result = {};
-    array.reduce((_, cur) => result[cbf(cur)] = result[cbf(cur)] === undefined ?  1 : result[cbf(cur)] + 1, 1);
-    return result;
+    return array.reduce((result, cur) => {result[cbf(cur)] = result[cbf(cur)] === undefined ? 1 : result[cbf(cur)] + 1; return result}, {});
+    
 }
 const array100 = ["lmn", "d", "d", "lmn", "a", "lmn", "a", "bc"];
 displayOccurrences(array100);
@@ -46,6 +43,6 @@ const persons = [
     createPerson(126, "Sara", createAddress("Lod", "Sokolov"))
 ] 
 //Task6 from hw14 extra
-const counts = {};
-persons.reduce((_, cur) => counts[cur.address.city] = (counts[cur.address.city] !== undefined) ? counts[cur.address.city]+1 : 1, 1);
+
+const counts = persons.reduce((result, cur) => {result[cur.address.city] = (result[cur.address.city] !== undefined) ? result[cur.address.city]+1 : 1; return result}, {});
 console.log(counts);
