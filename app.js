@@ -1,65 +1,37 @@
-function myForEach(array, callbackFunction) {
-    for (let i = 0; i < array.length; i++) {
-        callbackFunction(array[i], i, array); 
-    }
+function displayOccurrences(array) {
+    const res = createObjOccurrences (array);
+    Object.entries(res).sort((e1, e2) => {
+        const res = e2[1] - e1[1];
+        return res === 0 ? e1[0].localeCompare(e2[0]) : res;
+    }).forEach(e => console.log(`${e[0]} -> ${e[1]}`));
 }
-
-// task1
-function myFilter (array, cb) {
-    const newAr = [];
-    myForEach(array, (n, i, a) =>  cb (n, i, a) ? newAr.push(n) : 0);
-    return newAr;
-}
-
-//task2
-function myReduce(array, callback, initialResult) {
-    let result;
-    if (initialResult) {
-        result = initialResult;
-        myForEach(array, (n, i, a) => result =callback(result, n,i,a) );
-    }
-    else {
-        result = array[0];
-        const newArray = array.slice(1)
-        myForEach(newArray, (n, i, a) => result = callback(result, n, i, a) );
-    }
+//Task1
+function createObjOccurrences(array) {
+    const result = {};
+    array.reduce((_, cur) => result[cur] =  result[cur] === undefined ? 1 : result[cur] + 1, 1);
     return result;
 }
-const ar20 = [13, 17,20, 23, 2, 40, 15];
-const arEvenOdd = myFilter(ar20, (n,i,a) => a.length %2 == 0 ? n%2 == 0: n%2 == 1);
-console.log(arEvenOdd);
-const res = myReduce(ar20, (res, cur) => res+cur, 0);
-console.log(res);
+// Task2
+function countBy (array, cbf) {
+    const result = {};
+    array.reduce((_, cur) => result[cbf(cur)] = result[cbf(cur)] === undefined ?  1 : result[cbf(cur)] + 1, 1);
+    return result;
+}
+const array100 = ["lmn", "d", "d", "lmn", "a", "lmn", "a", "bc"];
+displayOccurrences(array100);
+const arr99 = [6.4, 7.3, 6.5, 6.9];
+const statistics1 = countBy(arr99, element => Math.floor(element));
+console.log(statistics1);
+const arr98 = ['abcd', 'lmnr', 'ab', 'dddd'];
+const statistics2 = countBy(arr98, element => element.length);
+console.log(statistics2);
+const arr97 = [{age : 25, id : 123, name : "Vasya"}, 
+{age : 50, id : 123, name : "Vasya"},
+{age : 25, id : 123, name : "Vasya"},
+{age : 70, id : 123, name : "Vasya"}]
+const statistics3 = countBy(arr97, element => element.age);
+console.log(statistics3);
 
-//task3
-
-function getPerson(persons, city) {
-    const personInTheCity = persons.filter((n, i, a)=> persons[i].address.city == city);
-    return personInTheCity;
-}
-
-//task4
-function movePersonsNoCityAtBeginning(persons, city) {
-    const arrayNoCity = persons.filter((n, i, a)=> persons[i].address.city != city);
-    const arrayCity = persons.filter((n, i, a)=> persons[i].address.city == city);
-    const res = arrayNoCity.concat(arrayCity);
-    return res;
-}
-function movePersonsNoCityAtBeginning1 (persons, city) {
-    const res = persons.slice();
-    res.sort((a, b) => (a.address.city == city) ? ((b.address.city != city) ? 1 : 0) : ((b.address.city != city) ? 0 : -1));
-    return res;
-}
-function movePersonsNoCityAtBeginning2 (persons, city) {
-    const res = persons.slice();
-    myForEach(res, (n, i, a) => {
-        if (n.address.city != city) {
-            res.unshift(n);
-            res.splice(i+1, 1);
-        }
-    })
-    return res;
-}
 
 function createAddress (city, street) {
     return {city, street}
@@ -73,19 +45,7 @@ const persons = [
     createPerson(125, "Tolya", createAddress("Tel-Aviv", "Dizengoff")),
     createPerson(126, "Sara", createAddress("Lod", "Sokolov"))
 ] 
-const rehovot = getPerson(persons, "Rehovot");
-console.log(rehovot);
-const newArray = movePersonsNoCityAtBeginning(persons, "Rehovot");
-console.log(newArray);
-const newArray1 = movePersonsNoCityAtBeginning1(persons, "Rehovot");
-console.log(newArray1);
-const newArray2 = movePersonsNoCityAtBeginning2(persons, "Rehovot");
-console.log(newArray2);
-// task5 extra 
-const maxIdRehovot = persons.filter ((n, i, a) => n.id == persons.filter((n, i, a)=> n.address.city == "Rehovot").reduce((max, cur) => cur.id > max ? cur.id : max, persons[0].id))[0].name;
-console.log(maxIdRehovot);
-//task6 extra
-const times = {};
-persons.forEach((n, i, a) => times[`${n.address.city}`] = persons.filter((p, i, a) => p.address.city == n.address.city).length);
-console.log(times);
-
+//Task6 from hw14 extra
+const counts = {};
+persons.reduce((_, cur) => counts[cur.address.city] = (counts[cur.address.city] !== undefined) ? counts[cur.address.city]+1 : 1, 1);
+console.log(counts);
