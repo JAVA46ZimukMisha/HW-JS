@@ -48,12 +48,13 @@ const counts = persons.reduce((result, cur) => {result[cur.address.city] = (resu
 console.log(counts);
 
 //HW 15 extra 
-function groupBy(array, keyObject) {
-    return  array.reduce((result, cur) => {result[cur.address.city] = 
+function groupBy(array, cbfkeyObject, cbfResult) {
+    const res = array.reduce((result, cur) => {result[cur.address.city] = 
         (result[cur.address.city] !== undefined) ? 
-        ((typeof result[cur.address.city] === "number") ? (result[cur.address.city]+1) : result[cur.address.city].concat(cur[keyObject])) : 
-        keyObject !== undefined ? [cur[keyObject]] : 1;
+        ((typeof result[cur.address.city] === "number") ? (result[cur.address.city]+1) : result[cur.address.city].concat(cur[cbfkeyObject(array)])) : 
+        cbfkeyObject !== undefined ? [cur[cbfkeyObject(array)]] : 1;
         return result}, {});
+        return cbfResult !== undefined ? cbfResult(res) : res;    
 }
-console.log(groupBy(persons, "name"));
+console.log(groupBy(persons, (ar, key) => key = Object.keys(ar[0])[2], resOb => resOb = JSON.stringify(resOb)));
 console.log(groupBy(persons));
