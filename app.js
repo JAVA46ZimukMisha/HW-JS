@@ -46,3 +46,14 @@ const persons = [
 
 const counts = persons.reduce((result, cur) => {result[cur.address.city] = (result[cur.address.city] !== undefined) ? result[cur.address.city]+1 : 1; return result}, {});
 console.log(counts);
+
+//HW 15 extra 
+function groupBy(array, keyObject) {
+    return  array.reduce((result, cur) => {result[cur.address.city] = 
+        (result[cur.address.city] !== undefined) ? 
+        ((typeof result[cur.address.city] === "number") ? (result[cur.address.city]+1) : result[cur.address.city].concat(cur[keyObject])) : 
+        keyObject !== undefined ? [cur[keyObject]] : 1;
+        return result}, {});
+}
+console.log(groupBy(persons, "name"));
+console.log(groupBy(persons));
