@@ -68,7 +68,9 @@ function countOfPersonType(persons, type) {
 console.log(countOfPersonType(person, "WageEmployee"));
 //task2
 function computeSalaryBudget(persons) {
-    return persons.filter(n => n.constructor.name !== "Child").reduce((sum, per) => sum + per.computeSalary(), 0);
+    const allEmployees = persons.filter(p => !!p.computeSalary);
+    const salaryValues = allEmployees.map(p => p.computeSalary());
+    return salaryValues.reduce((res,cur) => res+cur);
 }
 console.log(computeSalaryBudget(person));
 //task3
@@ -79,3 +81,12 @@ function countChildrenKindergarten (persons, kindergarten) {
    return res}, 0)
 }
 console.log(countChildrenKindergarten (person, "Shalom"));
+
+function testOutput(fun, expected) {
+    console.log(`function ${fun.name}; expected result: ${expected}; actual result: ${fun()}`)
+}
+testOutput(WageEmployee.prototype.computeSalary.bind(person[4]), 2000);
+testOutput(computeSalaryBudget.bind(undefined, person), 3000);
+testOutput(countChildrenKindergarten.bind(undefined, person, "Shalom"), 2)
+
+testOutput(person[4].computeSalary(), 2000);
