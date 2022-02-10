@@ -15,8 +15,8 @@ console log (concateMassage) - App - Test status: Done
 */
 //task1
 function getRandomNumber(min, max) {
-    const [mi, ma] = [min, max].sort((a, b) => a-b);
-    return Math.floor(Math.random()*((ma+1)-mi) +mi);
+    [min, max] = [min, max].sort((a, b) => a-b);
+    return Math.floor(Math.random()*((max+1)-min) +min);
 } 
 console.log(getRandomNumber(15, 5))
 //task2
