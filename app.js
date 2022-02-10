@@ -1,15 +1,17 @@
 /* 
+task 1
 function getRandomNumber(min, max) {
     todo min - minimal value, max - max value (inclusive)
     exmple: getRandomNumber(0, 1) - returns number 0 or 1
     if min > max you should swap values 
     swap should be without additional variable in 1 line code
 }
+task 2
 write the function concatinate(prefix) {...}
 that by using the following code 
 const concatApp = concatinate('App -')
-const concatMassage = concatApp('test status: done)'
-console log (concateMassage) - app - test status: done
+const concatMassage = concatApp('Test status: Done)'
+console log (concateMassage) - App - Test status: Done
 */
 //task1
 function getRandomNumber(min, max) {
